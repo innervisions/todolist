@@ -65,6 +65,12 @@ class TodoList:
 
     def to_list(self):
         return self._todos.copy()
+    
+    def mark_done_at(self, index):
+        self.todo_at(index).done = True
+        
+    def mark_undone_at(self, index):
+        self.todo_at(index).done = False
 
 
 # Code omitted for brevity.
@@ -189,3 +195,63 @@ def step_6():
 
 
 step_6()
+
+
+def step_7():
+    print("--------------------------------- Step 7")
+    todo_list = setup()
+
+    todo_list.mark_done_at(0)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [X] Buy milk
+    # [X] Clean room
+    # [ ] Go to gym
+
+    todo_list.mark_done_at(1)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [X] Buy milk
+    # [X] Clean room
+    # [ ] Go to gym
+
+    todo_list.mark_done_at(2)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [X] Buy milk
+    # [X] Clean room
+    # [X] Go to gym
+
+    try:
+        todo_list.mark_done_at(3)
+    except IndexError:
+        print("Expected IndexError: Got it!")
+
+    todo_list.mark_undone_at(0)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [X] Clean room
+    # [X] Go to gym
+
+    todo_list.mark_undone_at(1)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [ ] Clean room
+    # [X] Go to gym
+
+    todo_list.mark_undone_at(2)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [ ] Clean room
+    # [ ] Go to gym
+
+    try:
+        todo_list.mark_undone_at(3)
+    except IndexError:
+        print("Expected IndexError: Got it!")
+
+
+step_7()
