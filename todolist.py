@@ -60,6 +60,9 @@ class TodoList:
     def last(self):
         return self._todos[-1]
     
+    def todo_at(self, index):
+        return self._todos[index]
+
     def to_list(self):
         return self._todos.copy()
 
@@ -166,3 +169,23 @@ def step_5():
 
 
 step_5()
+
+
+def step_6():
+    print("--------------------------------- Step 6")
+    todo_list = setup()
+
+    print(todo_list.todo_at(0))  # [ ] Buy milk
+    print(todo_list.todo_at(1))  # [X] Clean room
+    print(todo_list.todo_at(2))  # [ ] Go to gym
+
+    try:
+        todo_list.todo_at(3)
+    except IndexError:
+        print("Expected IndexError: Got it!")
+
+    # Ensure we have a reference
+    print(todo_list.todo_at(1) is todo_list.todo_at(1))  # True
+
+
+step_6()
