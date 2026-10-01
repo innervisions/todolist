@@ -63,4 +63,4 @@ def test_todo():
     print(todo4.done)             # False
     print(todo4)                  # [ ] Clean room
 
-test_todo()
+# test_todo()
