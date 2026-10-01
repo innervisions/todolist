@@ -72,6 +72,13 @@ class TodoList:
     def mark_undone_at(self, index):
         self.todo_at(index).done = False
 
+    def mark_all_done(self):
+        for todo in self._todos:
+            todo.done = True
+
+    def mark_all_undone(self):
+        for todo in self._todos:
+            todo.done = False
 
 # Code omitted for brevity.
 
@@ -255,3 +262,31 @@ def step_7():
 
 
 step_7()
+
+
+def step_8():
+    print("--------------------------------- Step 8")
+    todo_list = setup()
+
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [X] Clean room
+    # [ ] Go to gym
+
+    todo_list.mark_all_done()
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [X] Buy milk
+    # [X] Clean room
+    # [X] Go to gym
+
+    todo_list.mark_all_undone()
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [ ] Clean room
+    # [ ] Go to gym
+
+
+step_8()
