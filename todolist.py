@@ -79,6 +79,12 @@ class TodoList:
     def mark_all_undone(self):
         for todo in self._todos:
             todo.done = False
+            
+    def all_done(self):
+        return all(todo.done for todo in self._todos)
+    
+    def remove_at(self, index):
+        del self._todos[index]
 
 # Code omitted for brevity.
 
@@ -290,3 +296,55 @@ def step_8():
 
 
 step_8()
+
+
+def step_9():
+    print("--------------------------------- Step 9")
+    todo_list = setup()
+
+    print(todo_list.all_done())  # False
+
+    todo_list.mark_all_done()
+    print(todo_list.all_done())  # True
+
+    todo_list.mark_undone_at(1)
+    print(todo_list.all_done())  # False
+
+    print(empty_todo_list.all_done())  # True
+
+
+step_9()
+
+
+def step_10():
+    print("--------------------------------- Step 10")
+    todo_list = setup()
+
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [X] Clean room
+    # [ ] Go to gym
+
+    todo_list.remove_at(1)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [ ] Go to gym
+
+    todo_list.remove_at(1)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+
+    try:
+        todo_list.remove_at(1)
+    except IndexError:
+        print("Expected IndexError: Got it!")
+
+    todo_list.remove_at(0)
+    print(todo_list)
+    # ---- Today's Todos -----
+
+
+step_10()
