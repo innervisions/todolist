@@ -40,6 +40,11 @@ class TodoList:
     @property
     def title(self):
         return self._title
+    
+    def add(self, todo):
+        if not isinstance(todo, Todo):
+            raise TypeError("Can only add Todo objects")
+        self._todos.append(todo)
 
 
 # Code omitted for brevity.
@@ -60,3 +65,23 @@ def setup():
     todo_list.add(todo3)
 
     return todo_list
+
+# Code omitted
+
+
+def step_1():
+    print("--------------------------------- Step 1")
+    todo_list = setup()
+
+    # setup() uses `todo_list.add` to add 3 todos
+
+    try:
+        todo_list.add(1)
+    except TypeError:
+        print("TypeError detected")  # TypeError detected
+
+    for todo in todo_list._todos:
+        print(todo)
+
+
+step_1()
