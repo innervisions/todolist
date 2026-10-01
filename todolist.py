@@ -37,10 +37,15 @@ class TodoList:
         self._title = title
         self._todos = []
 
+    def __str__(self):
+        output_lines = [f"----- {self.title} -----"]
+        output_lines += [str(todo) for todo in self._todos]
+        return "\n".join(output_lines)
+
     @property
     def title(self):
         return self._title
-    
+
     def add(self, todo):
         if not isinstance(todo, Todo):
             raise TypeError("Can only add Todo objects")
@@ -85,3 +90,17 @@ def step_1():
 
 
 step_1()
+
+
+def step_2():
+    print("--------------------------------- Step 2")
+    todo_list = setup()
+
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [X] Clean room
+    # [ ] Go to gym
+
+
+step_2()
