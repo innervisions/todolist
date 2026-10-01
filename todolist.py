@@ -53,6 +53,12 @@ class TodoList:
         if not isinstance(todo, Todo):
             raise TypeError("Can only add Todo objects")
         self._todos.append(todo)
+        
+    def first(self):
+        return self._todos[0]
+    
+    def last(self):
+        return self._todos[-1]
 
 
 # Code omitted for brevity.
@@ -118,3 +124,24 @@ def step_3():
 
 
 step_3()
+
+
+def step_4():
+    print("--------------------------------- Step 4")
+    todo_list = setup()
+
+    print(todo_list.first())  # [ ] Buy milk
+    print(todo_list.last())  # [ ] Go to gym
+
+    try:
+        empty_todo_list.first()
+    except IndexError:
+        print("Expected IndexError: Got it!")
+
+    try:
+        empty_todo_list.last()
+    except IndexError:
+        print("Expected IndexError: Got it!")
+
+
+step_4()
