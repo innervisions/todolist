@@ -59,6 +59,9 @@ class TodoList:
     
     def last(self):
         return self._todos[-1]
+    
+    def to_list(self):
+        return self._todos.copy()
 
 
 # Code omitted for brevity.
@@ -145,3 +148,21 @@ def step_4():
 
 
 step_4()
+
+
+def step_5():
+    print("--------------------------------- Step 5")
+    todo_list = setup()
+
+    print(empty_todo_list.to_list())  # []
+
+    todos = todo_list.to_list()
+    print(type(todos).__name__)  # list
+
+    for todo in todos:
+        print(todo)  # [ ] Buy milk
+        # [X] Clean room
+        # [ ] Go to gym
+
+
+step_5()
