@@ -41,6 +41,9 @@ class TodoList:
         output_lines = [f"----- {self.title} -----"]
         output_lines += [str(todo) for todo in self._todos]
         return "\n".join(output_lines)
+    
+    def __len__(self):
+        return len(self._todos)
 
     @property
     def title(self):
@@ -104,3 +107,14 @@ def step_2():
 
 
 step_2()
+
+
+def step_3():
+    print("--------------------------------- Step 3")
+    todo_list = setup()
+
+    print(len(todo_list))  # 3
+    print(len(empty_todo_list))  # 0
+
+
+step_3()
