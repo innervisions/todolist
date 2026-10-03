@@ -41,7 +41,7 @@ class TodoList:
         output_lines = [f"----- {self.title} -----"]
         output_lines += [str(todo) for todo in self._todos]
         return "\n".join(output_lines)
-    
+
     def __len__(self):
         return len(self._todos)
 
@@ -53,22 +53,22 @@ class TodoList:
         if not isinstance(todo, Todo):
             raise TypeError("Can only add Todo objects")
         self._todos.append(todo)
-        
+
     def first(self):
         return self._todos[0]
-    
+
     def last(self):
         return self._todos[-1]
-    
+
     def todo_at(self, index):
         return self._todos[index]
 
     def to_list(self):
         return self._todos.copy()
-    
+
     def mark_done_at(self, index):
         self.todo_at(index).done = True
-        
+
     def mark_undone_at(self, index):
         self.todo_at(index).done = False
 
@@ -79,12 +79,27 @@ class TodoList:
     def mark_all_undone(self):
         for todo in self._todos:
             todo.done = False
-            
+
     def all_done(self):
         return all(todo.done for todo in self._todos)
-    
+
     def remove_at(self, index):
         del self._todos[index]
+
+    def each(self, callback):
+        for todo in self._todos:
+            callback(todo)
+
+    def select(self, callback):
+        new_list = TodoList(self.title)
+
+        def choose(todo):
+            if callback(todo):
+                new_list.add(todo)
+
+        self.each(choose)
+        return new_list
+
 
 # Code omitted for brevity.
 
@@ -348,3 +363,54 @@ def step_10():
 
 
 step_10()
+
+
+def step_11():
+    print("--------------------------------- Step 11")
+    todo_list = setup()
+
+    todo_list.mark_all_undone()
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [ ] Clean room
+    # [ ] Go to gym
+
+    def done_if_y_in_title(todo):
+        if "y" in todo.title:
+            todo.done = True
+
+    todo_list.each(done_if_y_in_title)
+    print(todo_list)
+    # ---- Today's Todos -----
+    # [X] Buy milk
+    # [ ] Clean room
+    # [X] Go to gym
+
+    todo_list.each(lambda todo: print(">>>", todo))
+    # >>> [X] Buy milk
+    # >>> [ ] Clean room
+    # >>> [X] Go to gym
+
+
+step_11()
+
+
+def step_12():
+    print("--------------------------------- Step 12")
+    todo_list = setup()
+
+    def y_in_title(todo):
+        return "y" in todo.title
+
+    print(todo_list.select(y_in_title))
+    # ---- Today's Todos -----
+    # [ ] Buy milk
+    # [ ] Go to gym
+
+    print(todo_list.select(lambda todo: todo.done))
+    # ---- Today's Todos -----
+    # [X] Clean room
+
+
+step_12()
