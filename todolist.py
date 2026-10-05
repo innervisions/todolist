@@ -103,6 +103,12 @@ class TodoList:
     def find_by_title(self, title):
         found = self.select(lambda todo: todo.title == title)
         return found.todo_at(0)
+    
+    def done_todos(self):
+        return self.select(lambda todo: todo.done)
+    
+    def undone_todos(self):
+        return self.select(lambda todo: not todo.done)
 
 # Code omitted for brevity.
 
@@ -446,3 +452,30 @@ def step_13():
 
 
 step_13()
+
+
+def step_14():
+    print("--------------------------------- Step 14")
+    todo_list = setup()
+
+    done = todo_list.done_todos()
+    print(done)
+    # ----- Today's Todos -----
+    # [X] Clean room
+
+    undone = todo_list.undone_todos()
+    print(undone)
+    # ----- Today's Todos -----
+    # [ ] Buy milk
+    # [ ] Go to gym
+
+    done = empty_todo_list.done_todos()
+    print(done)
+    # ----- Nothing Doing -----
+
+    undone = empty_todo_list.undone_todos()
+    print(undone)
+    # ----- Nothing Doing -----
+
+
+step_14()
