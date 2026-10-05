@@ -73,12 +73,14 @@ class TodoList:
         self.todo_at(index).done = False
 
     def mark_all_done(self):
-        for todo in self._todos:
+        def mark(todo):
             todo.done = True
+        self.each(mark)
 
     def mark_all_undone(self):
-        for todo in self._todos:
+        def mark(todo):
             todo.done = False
+        self.each(mark)
 
     def all_done(self):
         return all(todo.done for todo in self._todos)
@@ -103,13 +105,13 @@ class TodoList:
     def find_by_title(self, title):
         found = self.select(lambda todo: todo.title == title)
         return found.todo_at(0)
-    
+
     def done_todos(self):
         return self.select(lambda todo: todo.done)
-    
+
     def undone_todos(self):
         return self.select(lambda todo: not todo.done)
-    
+
     def mark_done(self, title):
         todo = self.find_by_title(title)
         todo.done = True
