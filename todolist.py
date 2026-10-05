@@ -109,6 +109,10 @@ class TodoList:
     
     def undone_todos(self):
         return self.select(lambda todo: not todo.done)
+    
+    def mark_done(self, title):
+        todo = self.find_by_title(title)
+        todo.done = True
 
 # Code omitted for brevity.
 
@@ -479,3 +483,23 @@ def step_14():
 
 
 step_14()
+
+
+def step_15():
+    print("--------------------------------- Step 15")
+    todo_list = setup()
+
+    todo_list.mark_done("Go to gym")
+    print(todo_list)
+    # ----- Today's Todos -----
+    # [ ] Buy milk
+    # [X] Clean room
+    # [X] Go to gym
+
+    try:
+        todo_list.mark_done("Feed cat")
+    except IndexError:
+        print("Expected IndexError: Got it!")
+
+
+step_15()
