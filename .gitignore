@@ -1,6 +1,5 @@
 .pylintrc
 .coverage
-htmlcov/
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.pyc
